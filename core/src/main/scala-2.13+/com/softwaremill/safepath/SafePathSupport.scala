@@ -3,11 +3,12 @@ package com.softwaremill.safepath
 import com.softwaremill.safepath.SafePathCommonSupport._
 
 import scala.annotation.compileTimeOnly
+import scala.collection.Factory
 
 trait SafePathSupport extends SafePathCommonSupport {
   implicit def traversableSafePathFunctor[F[_], A](
-    implicit fac: Factory[A, F[A]],
-    ev: F[A] => Iterable[A]
+      implicit fac: Factory[A, F[A]],
+      ev: F[A] => Iterable[A]
   ): SafePathFunctor[F, A] =
     new SafePathFunctor[F, A] {}
 
